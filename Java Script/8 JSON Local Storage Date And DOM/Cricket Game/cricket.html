@@ -2,40 +2,46 @@
 <html lang="en">
 <head>
     <title>Cricket Game</title>
-    <style>
-        body {
-            text-align: center  ;
-        }
-    </style>
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Bat Ball Stump Game</h1>
-    <button onclick="
+     
+    <button class="choice-button" onclick="
     let computerChoice = generateComputerChoice(); 
     let resultMsg = getResult('Bat', computerChoice);
     showResult('Bat', computerChoice, resultMsg);
-       ">Bat</button>
+       ">
+        <img src="bat.webp" alt="Bat Image" class="choice-image">
+      </button>
 
-    <button onclick="
+    <button class="choice-button" onclick="
       computerChoice = generateComputerChoice();
       resultMsg = getResult('Ball', computerChoice);
        showResult('Ball', computerChoice, resultMsg);
-      ">Ball</button>
+      ">
+        <img src="ball.webp" alt="Ball Image" class="choice-image">
+      </button>
      
-    <button onclick="
+    <button class="choice-button" onclick="
          computerChoice = generateComputerChoice();
       resultMsg = getResult('Stump', computerChoice);
       showResult('Stump', computerChoice, resultMsg);
-     ">Stump</button>
+     ">
+        <img src="stump.jpg" alt="Stump Image" class="choice-image">
+      </button>
 
-     <button onclick="localStorage.clear()
-        resetScore();
-     ">Reset</button>
+    
 
       <h3 id="user-move"></h3>
       <h3 id="computer-move"></h3>
       <h3 id="result"></h3>
       <h3 id="score"></h3>
+
+
+       <button onclick="localStorage.clear()
+        resetScore();
+     ">Reset</button>
 
 
      <script>  
@@ -52,8 +58,9 @@
         };
        
       score.displayScore = function() {
-         return  `Score Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
+         return  `Score: Won:${score.win}, Lost:${score.lost}, Tie:${score.tie}`;
       };
+      showResult();
      }
 
 
@@ -112,10 +119,16 @@
           //JSON.stringify() is the opposite of JSON.parse().
           //It converts a JavaScript object/array into a JSON string.
 
-        localStorage.setItem('Score',JSON.stringify(score)); 
-        document.querySelector('#user-move').innerText = `You have chosen ${userMove}`;
-        document.querySelector('#computer-move').innerText = `Computer choice is  ${computerMove}`;
-        document.querySelector('#result').innerText = result;
+        localStorage.setItem('Score',JSON.stringify(score));
+
+
+        document.querySelector('#user-move').innerText = userMove  ?  `You have chosen ${userMove}` 
+        : '';
+
+        document.querySelector('#computer-move').innerText = computerMove  ? `Computer choice is  ${computerMove}` : '';
+
+
+        document.querySelector('#result').innerText = result ||'' ;
         document.querySelector('#score').innerText = score.displayScore();
 
       }
